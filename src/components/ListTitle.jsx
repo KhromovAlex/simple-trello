@@ -1,22 +1,22 @@
 import React from 'react';
-import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
-import './BoardTitle.scss';
+import ClassNames from 'classnames';
+import './ListTitle.scss';
 
-const BoardTitle = (props) => {
+const ListTitle = (props) => {
     const { title, className } = props;
     const classTitle = ClassNames(
-        "board-title",
+        'list-title',
         className
     );
     return (
-        <h2 className={classTitle}>{title}</h2>
+        <h4 className={classTitle}>{title}</h4>
     );
 };
 
-BoardTitle.propTypes = {
+ListTitle.propTypes = {
     title: PropTypes.string.isRequired,
     className: PropTypes.string,
 };
 
-export default BoardTitle;
+export default ListTitle;
