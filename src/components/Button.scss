@@ -8,13 +8,39 @@
     color: #777;
     background: #fff;
     border-radius: 3px;
+    transition: all .5s;
 }
 
 .button:hover {
-    box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
     transition: all .3s;
 }
 
 .button:disabled {
     cursor: not-allowed;
+}
+
+.button_round {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    font-size: 10px;
+    margin-bottom: 20px;
+
+    &:hover {
+        transform: rotate(180deg);
+        box-shadow: none;
+    }
+}
+
+.button_square {
+    width: 100px;
+    height: 100px;
+    background: #2929c9;
+    color: #ffffff;
+
+    &:hover {
+        transform: translate(-2px, -2px);
+    }
 }
