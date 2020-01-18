@@ -1,0 +1,16 @@
+.add-board-component {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    padding-top: 5px;
+    border-radius: 10px;
+    background: #679be9;
+}
+
+.add-board-component__title {
+    width: 100%;
+    margin: 0 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted #fff;
+}
