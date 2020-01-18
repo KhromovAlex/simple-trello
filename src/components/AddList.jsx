@@ -13,7 +13,7 @@ export default class AddList extends React.Component {
     }
 
     static propTypes = {
-        handleNewList: PropTypes.func,
+        handleNewList: PropTypes.func.isRequired,
     }
 
     toogleInput = () => {
