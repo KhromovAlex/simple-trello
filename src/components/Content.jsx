@@ -2,49 +2,60 @@ import React from 'react';
 import Board from './Board';
 import AddBoard from './AddBoard';
 import { Switch, Route, Link } from 'react-router-dom';
-import {uniqueId} from 'lodash';
+import { uniqueId } from 'lodash';
 import './Content.scss';
 
 export default class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrayBoards: [],
-            arrayRoutes: [],
+            boards: [],
+            lists: [],
+            tasks: [],
         };
     }
 
-    handleNewBoard = (title) => {
-        const board = <Board title={title} />;
-        const route = <Route path={`/${title}`}>{board}</Route>;
+    handleNewBoard = (newBoard) => {
         this.setState((oldState) => ({
-            arrayBoards: [
-                {
-                    name: title,
-                    component: board,
-                },
-                ...oldState.arrayBoards,
-            ],
-            arrayRoutes: [
-                ...oldState.arrayRoutes,
-                route,
+            boards: [
+                newBoard,
+                ...oldState.boards,
             ],
         }))
     }
 
+    handleNewList = (newList) => {
+        this.setState((oldState) => ({
+            lists: [
+                newList,
+                ...oldState.lists,
+            ],
+        }));
+    }
+
+    handleNewTask = (newTask) => {
+        this.setState((oldState) => ({
+            tasks: [
+                newTask,
+                ...oldState.tasks,
+            ],
+        }));
+    }
+
     render() {
-        const { arrayBoards, arrayRoutes } = this.state;
+        const { boards, tasks, lists } = this.state;
+
         return (
             <main className="content">
                 <Switch>
                     <Route exact path='/'>
                         {
-                            arrayBoards.length ?
-                            <ul>
+                            boards.length ?
+                            <ul className="board__list">
                                 {
-                                    arrayBoards.map((board) => (
-                                        <li key={uniqueId()}>
-                                            <Link to={board.name}>{board.name}</Link>
+                                    boards.map((board) => (
+                                        <li className="board__item" key={uniqueId()}>
+                                            <Link className="board__link" to={board}>{board}</Link>
                                         </li>
                                     ))
                                 }
@@ -53,7 +64,19 @@ export default class Content extends React.Component {
                         }
                         <AddBoard handleNewBoard={this.handleNewBoard} />
                     </Route>
-                    {arrayRoutes.length ? arrayRoutes : null}
+                    {boards.length ?
+                    boards.map((board) => (
+                        <Route key={uniqueId()} path={`/${board}`}>
+                            <Board
+                                lists={lists.filter((list) => list.boardName === board)}
+                                handleNewTask={this.handleNewTask}
+                                handleNewList={this.handleNewList}
+                                tasks={tasks.filter((task) => task.boardName === board)}
+                                title={board}
+                            />
+                        </Route>
+                    ))
+                    : null}
                 </Switch>
             </main>
         );

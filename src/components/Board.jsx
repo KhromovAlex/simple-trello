@@ -3,49 +3,47 @@ import BoardTitle from './BoardTitle';
 import AddList from './AddList';
 import ListBlock from './ListBlock';
 import PropTypes from 'prop-types';
-import {uniqueId} from 'lodash';
+import { uniqueId } from 'lodash';
 
-export default class Board extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            arrayListComponents: [],
-        };
+const Board = (props) => {
+    const handleNewList = (newList) => {
+        const { handleNewList } = props;
+        handleNewList(newList);
     }
 
-    static propTypes = {
-        title: PropTypes.string.isRequired,
-    }
+    const { title, tasks, handleNewTask, lists } = props;
 
-    handleNewList = (title) => {
-        const listBlock = <ListBlock title={title} />;
-        this.setState((oldState) => ({
-            arrayListComponents: [
-                listBlock,
-                ...oldState.arrayListComponents,
-            ]
-        }))
-    }
+    return (
+        <>
+            <BoardTitle title={title} />
+            {
+                lists.length ?
+                <ul>
+                    {
+                        lists.map((list) => (
+                            <li key={uniqueId()}>
+                                <ListBlock
+                                    handleNewTask={handleNewTask}
+                                    list={list}
+                                    tasks={tasks}
+                                />
+                            </li>
+                        ))
+                    }
+                </ul>
+                : null
+            }
+            <AddList boardName={title} handleNewList={handleNewList} />
+        </>
+    );
+};
 
-    render() {
-        const { title } = this.props;
-        const { arrayListComponents } = this.state;
-        return (
-            <>
-                <BoardTitle title={title} />
-                {
-                    arrayListComponents.length ?
-                    <ul>
-                        {
-                            arrayListComponents.map((list) => (
-                                <li key={uniqueId()}>{list}</li>
-                            ))
-                        }
-                    </ul>
-                    : null
-                }
-                <AddList handleNewList={this.handleNewList} />
-            </>
-        );
-    }
-}
+Board.propTypes = {
+    title: PropTypes.string.isRequired,
+    handleNewTask: PropTypes.func.isRequired,
+    handleNewList: PropTypes.func.isRequired,
+    lists: PropTypes.array.isRequired,
+    tasks: PropTypes.array.isRequired,
+};
+
+export default Board;

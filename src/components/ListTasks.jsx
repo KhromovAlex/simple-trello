@@ -1,6 +1,7 @@
 import React from 'react';
+import Task from './Task';
 import PropTypes from 'prop-types';
-import {uniqueId} from 'lodash';
+import { uniqueId } from 'lodash';
 
 const ListTasks = (props) => {
     const { tasks } = props;
@@ -9,7 +10,7 @@ const ListTasks = (props) => {
         <ul>
             {
                 tasks.map((task) => (
-                    <li key={uniqueId()}>{task.text}</li>
+                    <Task state={task.state} key={uniqueId()}>{task.name}</Task>
                 ))
             }
         </ul>
@@ -19,6 +20,10 @@ const ListTasks = (props) => {
 
 ListTasks.propTypes = {
     tasks: PropTypes.array,
+};
+
+ListTasks.defaultProps = {
+    tasks: [],
 };
 
 export default ListTasks;

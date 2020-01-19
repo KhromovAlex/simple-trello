@@ -14,6 +14,7 @@ export default class AddList extends React.Component {
 
     static propTypes = {
         handleNewList: PropTypes.func.isRequired,
+        boardName: PropTypes.string.isRequired,
     }
 
     toogleInput = () => {
@@ -22,15 +23,23 @@ export default class AddList extends React.Component {
         }));
     }
 
+    handleInput = (listName) => {
+        const { handleNewList, boardName } = this.props;
+        const newList = {
+            listName,
+            boardName,
+        };
+        handleNewList(newList);
+    }
+
     render() {
         const { isInput } = this.state;
-        const { handleNewList } = this.props;
 
         return (
             isInput ?
             <div className="add-list-component">
                 <Button className="button_round" onClick={this.toogleInput}>X</Button>
-                <InputByPress handleInput={handleNewList} />
+                <InputByPress handleInput={this.handleInput} />
             </div>
             : <Button className="button_square" onClick={this.toogleInput}>Add a list</Button>
         );
