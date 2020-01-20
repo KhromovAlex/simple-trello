@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from './Board';
 import AddBoard from './AddBoard';
+import NotFound from './NotFound';
 import { Switch, Route, Link } from 'react-router-dom';
 import { uniqueId } from 'lodash';
 import './Content.scss';
@@ -90,6 +91,7 @@ export default class Content extends React.Component {
                         </Route>
                     ))
                     : null}
+                    <Route path='*' component={NotFound}></Route>
                 </Switch>
             </main>
         );

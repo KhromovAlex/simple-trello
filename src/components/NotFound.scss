@@ -1,0 +1,21 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    div {
+        font-size: 45px;
+        font-family: monospace;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #333;
+    }
+}
+
+.not-found__link {
+    margin-top: 30px;
+    color: #00f;
+    text-decoration: none;
+}
