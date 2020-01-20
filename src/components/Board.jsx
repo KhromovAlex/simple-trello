@@ -7,19 +7,14 @@ import { uniqueId } from 'lodash';
 import './Board.scss';
 
 const Board = (props) => {
-    const handleNewList = (newList) => {
-        const { handleNewList } = props;
-        handleNewList(newList);
-    }
-
-    const { title, tasks, handleNewTask, lists } = props;
+    const { title, tasks, handleNewTask, lists, handleNewList, id } = props;
 
     return (
         <>
             <BoardTitle title={title} />
             <ul className="board-component">
                 <li className="list-block list-block_button">
-                    <AddList boardName={title} handleNewList={handleNewList} />
+                    <AddList boardId={id} handleNewList={handleNewList} />
                 </li>
                 {
                     lists.length ?
@@ -46,6 +41,7 @@ Board.propTypes = {
     handleNewList: PropTypes.func.isRequired,
     lists: PropTypes.array.isRequired,
     tasks: PropTypes.array.isRequired,
+    id: PropTypes.string.isRequired,
 };
 
 export default Board;

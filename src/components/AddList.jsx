@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button';
 import InputByPress from './InputByPress';
 import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
 import './AddList.scss';
 
 export default class AddList extends React.Component {
@@ -14,7 +15,7 @@ export default class AddList extends React.Component {
 
     static propTypes = {
         handleNewList: PropTypes.func.isRequired,
-        boardName: PropTypes.string.isRequired,
+        boardId: PropTypes.string.isRequired,
     }
 
     toogleInput = () => {
@@ -24,10 +25,11 @@ export default class AddList extends React.Component {
     }
 
     handleInput = (listName) => {
-        const { handleNewList, boardName } = this.props;
+        const { handleNewList, boardId } = this.props;
         const newList = {
+            listId: uniqueId(),
             listName,
-            boardName,
+            boardId,
         };
         handleNewList(newList);
     }

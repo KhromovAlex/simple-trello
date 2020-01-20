@@ -15,10 +15,13 @@ export default class Content extends React.Component {
         };
     }
 
-    handleNewBoard = (newBoard) => {
+    handleNewBoard = (name) => {
         this.setState((oldState) => ({
             boards: [
-                newBoard,
+                {
+                    id: uniqueId(),
+                    name,
+                },
                 ...oldState.boards,
             ],
         }))
@@ -55,7 +58,7 @@ export default class Content extends React.Component {
                                 boards.length ?                            
                                     boards.map((board) => (
                                         <li className="board__item" key={uniqueId()}>
-                                            <Link className="board__link" to={board}>{board}</Link>
+                                            <Link className="board__link" to={`/${board.name}-${board.id}`}>{board.name}</Link>
                                         </li>
                                     ))
                                 : null
@@ -64,13 +67,14 @@ export default class Content extends React.Component {
                     </Route>
                     {boards.length ?
                     boards.map((board) => (
-                        <Route key={uniqueId()} path={`/${board}`}>
+                        <Route key={uniqueId()} path={`/${board.name}-${board.id}`}>
                             <Board
-                                lists={lists.filter((list) => list.boardName === board)}
+                                lists={lists.filter((list) => list.boardId === board.id)}
                                 handleNewTask={this.handleNewTask}
                                 handleNewList={this.handleNewList}
-                                tasks={tasks.filter((task) => task.boardName === board)}
-                                title={board}
+                                tasks={tasks.filter((task) => task.boardId === board.id)}
+                                title={board.name}
+                                id={board.id}
                             />
                         </Route>
                     ))

@@ -4,15 +4,17 @@ import InputByPress from './InputByPress';
 import ListTasks from './ListTasks';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+import { uniqueId } from 'lodash';
 
 const ListBlock = (props) => {
     const handleNewTask = (name) => {
-        const { list: {listName, boardName}, handleNewTask } = props;
+        const { list: {listId, boardId}, handleNewTask } = props;
         const newTask = {
             name,
             state: 'active',
-            listName,
-            boardName,
+            listId,
+            boardId,
+            id: uniqueId(),
         };
 
         handleNewTask(newTask);
@@ -27,7 +29,7 @@ const ListBlock = (props) => {
         <li className={classListBlock}>
             <ListTitle title={list.listName} />
             <InputByPress handleInput={handleNewTask} />
-            <ListTasks tasks={tasks.filter((task) => task.listName === list.listName)} />
+            <ListTasks tasks={tasks.filter((task) => task.listId === list.listId)} />
         </li>
     );
 };
