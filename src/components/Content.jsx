@@ -45,6 +45,16 @@ export default class Content extends React.Component {
         }));
     }
 
+    handleUpdateTaskState = (id) => () => {   
+        const index = this.state.tasks.findIndex((task) => task.id === id);
+        this.setState((oldState) => ({
+            tasks: [
+                oldState.tasks[index].state = oldState.tasks[index].state === 'active' ? 'finished' : 'active',
+                ...oldState.tasks
+            ],
+        }));
+    }
+
     render() {
         const { boards, tasks, lists } = this.state;
 
@@ -72,6 +82,7 @@ export default class Content extends React.Component {
                                 lists={lists.filter((list) => list.boardId === board.id)}
                                 handleNewTask={this.handleNewTask}
                                 handleNewList={this.handleNewList}
+                                handleUpdateTaskState={this.handleUpdateTaskState}
                                 tasks={tasks.filter((task) => task.boardId === board.id)}
                                 title={board.name}
                                 id={board.id}

@@ -20,7 +20,7 @@ const ListBlock = (props) => {
         handleNewTask(newTask);
     }
 
-    const { list, className, tasks } = props;
+    const { list, className, tasks, handleUpdateTaskState } = props;
     const classListBlock = ClassNames(
         className
     );
@@ -29,7 +29,10 @@ const ListBlock = (props) => {
         <li className={classListBlock}>
             <ListTitle title={list.listName} />
             <InputByPress handleInput={handleNewTask} />
-            <ListTasks tasks={tasks.filter((task) => task.listId === list.listId)} />
+            <ListTasks
+                tasks={tasks.filter((task) => task.listId === list.listId)}
+                handleUpdateTaskState={handleUpdateTaskState}
+            />
         </li>
     );
 };
@@ -37,6 +40,7 @@ const ListBlock = (props) => {
 ListBlock.propTypes = {
     list: PropTypes.object.isRequired,
     handleNewTask: PropTypes.func.isRequired,
+    handleUpdateTaskState: PropTypes.func.isRequired,
     className: PropTypes.string,
 };
 

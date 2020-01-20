@@ -7,7 +7,7 @@ import { uniqueId } from 'lodash';
 import './Board.scss';
 
 const Board = (props) => {
-    const { title, tasks, handleNewTask, lists, handleNewList, id } = props;
+    const { title, tasks, handleNewTask, lists, handleNewList, id, handleUpdateTaskState } = props;
 
     return (
         <>
@@ -25,6 +25,7 @@ const Board = (props) => {
                                     list={list}
                                     tasks={tasks}
                                     className="list-block"
+                                    handleUpdateTaskState={handleUpdateTaskState}
                                 />
                             </Fragment>
                         ))
@@ -39,6 +40,7 @@ Board.propTypes = {
     title: PropTypes.string.isRequired,
     handleNewTask: PropTypes.func.isRequired,
     handleNewList: PropTypes.func.isRequired,
+    handleUpdateTaskState: PropTypes.func.isRequired,
     lists: PropTypes.array.isRequired,
     tasks: PropTypes.array.isRequired,
     id: PropTypes.string.isRequired,
