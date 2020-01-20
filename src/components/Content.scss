@@ -1,3 +1,28 @@
 .content {
-    padding: 30px;
+    padding: 10px 0;
+}
+
+.board__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.board__item {
+    margin: 10px;
+    list-style: none;
+}
+
+.board__link {
+    display: flex;
+    padding: 50px;
+    font-size: 22px;
+    color: #fff;
+    text-decoration: none;
+    background: #679be9;
+    border-radius: 10px;
+    transition: all .5s;
+
+    &:hover {
+        box-shadow: inset 0 0 10px 3px rgba(#000, 0.35);
+    }
 }

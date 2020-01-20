@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import BoardTitle from './BoardTitle';
 import AddList from './AddList';
 import ListBlock from './ListBlock';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+import './Board.scss';
 
 const Board = (props) => {
     const handleNewList = (newList) => {
@@ -16,24 +17,25 @@ const Board = (props) => {
     return (
         <>
             <BoardTitle title={title} />
-            {
-                lists.length ?
-                <ul>
-                    {
+            <ul className="board-component">
+                <li className="list-block list-block_button">
+                    <AddList boardName={title} handleNewList={handleNewList} />
+                </li>
+                {
+                    lists.length ?
                         lists.map((list) => (
-                            <li key={uniqueId()}>
+                            <Fragment key={uniqueId()}>
                                 <ListBlock
                                     handleNewTask={handleNewTask}
                                     list={list}
                                     tasks={tasks}
+                                    className="list-block"
                                 />
-                            </li>
+                            </Fragment>
                         ))
-                    }
-                </ul>
-                : null
-            }
-            <AddList boardName={title} handleNewList={handleNewList} />
+                    : null
+                }
+            </ul>
         </>
     );
 };

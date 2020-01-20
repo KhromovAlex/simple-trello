@@ -1,7 +1,25 @@
-.activeTask {
-    text-decoration: none;
+.task-component {
+    display: flex;
+    list-style: none;
+    color: #333;
+    margin-top: 10px;
 }
 
-.finishedTask {
-    text-decoration: line-through;
+.task-component__text {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.active-task {
+    background: #caffde;
+}
+
+.finished-task {
+    background: #decaff;
+
+    .task-component__text {
+        text-decoration: line-through;
+    }
 }

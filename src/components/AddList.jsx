@@ -39,7 +39,7 @@ export default class AddList extends React.Component {
             isInput ?
             <div className="add-list-component">
                 <Button className="button_round" onClick={this.toogleInput}>X</Button>
-                <InputByPress handleInput={this.handleInput} />
+                <InputByPress placeholder="List name..." handleInput={this.handleInput} />
             </div>
             : <Button className="button_square" onClick={this.toogleInput}>Add a list</Button>
         );

@@ -49,20 +49,18 @@ export default class Content extends React.Component {
             <main className="content">
                 <Switch>
                     <Route exact path='/'>
-                        {
-                            boards.length ?
-                            <ul className="board__list">
-                                {
+                        <ul className="board__list">
+                        <li className="board__item"><AddBoard handleNewBoard={this.handleNewBoard} /></li>
+                            {
+                                boards.length ?                            
                                     boards.map((board) => (
                                         <li className="board__item" key={uniqueId()}>
                                             <Link className="board__link" to={board}>{board}</Link>
                                         </li>
                                     ))
-                                }
-                            </ul>
-                            : null
-                        }
-                        <AddBoard handleNewBoard={this.handleNewBoard} />
+                                : null
+                            }
+                        </ul>
                     </Route>
                     {boards.length ?
                     boards.map((board) => (

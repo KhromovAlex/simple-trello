@@ -4,7 +4,6 @@ import InputByPress from './InputByPress';
 import ListTasks from './ListTasks';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
-import './ListBlock.scss';
 
 const ListBlock = (props) => {
     const handleNewTask = (name) => {
@@ -21,16 +20,15 @@ const ListBlock = (props) => {
 
     const { list, className, tasks } = props;
     const classListBlock = ClassNames(
-        'list-block',
         className
     );
 
     return (
-        <div className={classListBlock}>
+        <li className={classListBlock}>
             <ListTitle title={list.listName} />
             <InputByPress handleInput={handleNewTask} />
             <ListTasks tasks={tasks.filter((task) => task.listName === list.listName)} />
-        </div>
+        </li>
     );
 };
 

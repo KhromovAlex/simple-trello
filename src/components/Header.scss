@@ -2,10 +2,18 @@
     display: flex;
     justify-content: center;
     padding: 20px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,.5);
-    background: linear-gradient(0deg, #190ae9, #9fc6e7);
+    box-shadow: inset 0px 0px 15px 10px rgba(#fff, 0.3), 2px 2px 5px rgba(0,0,0,.35);
+    background: #6F82DA;
 }
 
-.header__img {
-    width: 100px;
+.header__logo-text {
+    color: #eee;
+    text-decoration: none;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: bold;
+
+    &:hover {
+        text-decoration:overline;
+    }
 }
