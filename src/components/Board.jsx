@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import BoardTitle from './BoardTitle';
 import AddList from './AddList';
 import ListBlock from './ListBlock';
@@ -19,15 +19,14 @@ const Board = (props) => {
                 {
                     lists.length ?
                         lists.map((list) => (
-                            <Fragment key={uniqueId()}>
                                 <ListBlock
                                     handleNewTask={handleNewTask}
                                     list={list}
                                     tasks={tasks}
                                     className="list-block"
                                     handleUpdateTaskState={handleUpdateTaskState}
+                                    key={uniqueId()}
                                 />
-                            </Fragment>
                         ))
                     : null
                 }

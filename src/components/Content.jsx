@@ -19,11 +19,11 @@ export default class Content extends React.Component {
     handleNewBoard = (name) => {
         this.setState((oldState) => ({
             boards: [
+                ...oldState.boards,
                 {
                     id: uniqueId(),
                     name,
                 },
-                ...oldState.boards,
             ],
         }))
     }
@@ -31,8 +31,8 @@ export default class Content extends React.Component {
     handleNewList = (newList) => {
         this.setState((oldState) => ({
             lists: [
-                newList,
                 ...oldState.lists,
+                newList,
             ],
         }));
     }
