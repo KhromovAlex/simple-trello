@@ -1,8 +1,11 @@
 .task-component {
     display: flex;
     list-style: none;
-    color: #333;
+    color: #eee;
     margin-top: 10px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: all .5s;
 }
 
 .task-component__text {
@@ -13,13 +16,23 @@
 }
 
 .active-task {
-    background: #caffde;
+    background: linear-gradient(0deg, #00a018, #00ff2a);
+    box-shadow: inset 0 0 5px 3px rgba(#00ff2a, .5);
+
+    &:hover {
+        box-shadow: inset 0 0 5px 3px rgba(#000, .5);
+    }
 }
 
 .finished-task {
-    background: #decaff;
+    background: linear-gradient(0deg, #ff0c00, #ff5e59);
+    box-shadow: inset 0 0 5px 3px rgba(#ff5e59, .5);
 
     .task-component__text {
         text-decoration: line-through;
+    }
+
+    &:hover {
+        box-shadow: inset 0 0 5px 3px rgba(#000, .35);
     }
 }

@@ -7,10 +7,11 @@
 .list-block {
     display: inline-flex;
     flex-direction: column;
-    background: #679be9;
+    background: #fefefe;
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
+    box-shadow: 2px 2px 3px 3px rgba(#000, 0.23);
 }
 
 .list-block_button {
