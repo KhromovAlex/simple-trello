@@ -1,48 +1,51 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import BoardTitle from './BoardTitle';
 import AddList from './AddList';
 import ListBlock from './ListBlock';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+import { addList } from './../actions';
 import './Board.scss';
 
-const Board = (props) => {
-    const { title, tasks, handleNewTask, lists, handleNewList, id, handleUpdateTaskState } = props;
+class Board extends React.Component {
+    static propTypes = {
+        name: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+    };
 
-    return (
-        <>
-            <BoardTitle title={title} />
-            <ul className="board-component">
-                <li className="list-block list-block_button">
-                    <AddList boardId={id} handleNewList={handleNewList} />
-                </li>
-                {
-                    lists.length ?
-                        lists.map((list) => (
-                                <ListBlock
-                                    handleNewTask={handleNewTask}
-                                    list={list}
-                                    tasks={tasks}
-                                    className="list-block"
-                                    handleUpdateTaskState={handleUpdateTaskState}
-                                    key={uniqueId()}
-                                />
-                        ))
-                    : null
-                }
-            </ul>
-        </>
-    );
+    handleNewList = (newList) => {
+        const { addList } = this.props;
+        addList(newList);
+    }
+
+    render() {
+        const { name, id, lists } = this.props;
+        
+        return (
+            <>
+                <BoardTitle title={name} />
+                <ul className="board-component">
+                    <li className="list-block list-block_button">
+                        <AddList boardId={id} handleNewList={this.handleNewList} />
+                    </li>
+                    { lists.length > 0 &&
+                            lists.map((list) => (
+                                    <ListBlock
+                                        boardId={list.boardId}
+                                        listId={list.id}
+                                        className="list-block"
+                                        key={uniqueId()}
+                                    />
+                            )) }
+                </ul>
+            </>
+        );
+    }
 };
 
-Board.propTypes = {
-    title: PropTypes.string.isRequired,
-    handleNewTask: PropTypes.func.isRequired,
-    handleNewList: PropTypes.func.isRequired,
-    handleUpdateTaskState: PropTypes.func.isRequired,
-    lists: PropTypes.array.isRequired,
-    tasks: PropTypes.array.isRequired,
-    id: PropTypes.string.isRequired,
-};
+const mapStateToProp = (state, ownProps) => ({
+    lists: Object.values(state.lists).filter((list) => list.boardId === ownProps.id),
+});
 
-export default Board;
+export default connect(mapStateToProp, { addList })(Board);

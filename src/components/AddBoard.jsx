@@ -8,7 +8,7 @@ export default class AddBoard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isInput: false,
+            isShowingInput: false,
         };
     }
 
@@ -16,24 +16,25 @@ export default class AddBoard extends React.Component {
         handleNewBoard: PropTypes.func.isRequired,
     }
 
-    toogleInput = () => {
+    handleToggle = () => {
         this.setState((oldState) => ({
-            isInput: !oldState.isInput,
+            isShowingInput: !oldState.isShowingInput,
         }));
     }
 
     render() {
-        const { isInput } = this.state;
+        const { isShowingInput } = this.state;
         const { handleNewBoard } = this.props;
-
-        return (
-            isInput ?
+        const inputAddBoard = 
             <div className="add-board-component">
-                <Button className="button_round" onClick={this.toogleInput}>X</Button>
+                <Button className="button_round" onClick={this.handleToggle}>X</Button>
                 <h4 className="add-board-component__title">Creating a board</h4>
                 <InputByPress placeholder="Board name..." handleInput={handleNewBoard} />
-            </div>
-            : <Button className="button_square" onClick={this.toogleInput}>Create a new board</Button>
+            </div>;
+        const buttonAddBoard = <Button className="button_square" onClick={this.handleToggle}>Create a new board</Button>;
+
+        return (
+            isShowingInput ? inputAddBoard : buttonAddBoard
         );
     }
 }

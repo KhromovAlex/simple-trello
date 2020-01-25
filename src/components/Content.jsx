@@ -1,99 +1,59 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Board from './Board';
 import AddBoard from './AddBoard';
 import NotFound from './NotFound';
 import { Switch, Route, Link } from 'react-router-dom';
 import { uniqueId } from 'lodash';
+import { addBoard } from './../actions';
 import './Content.scss';
 
-export default class Content extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            boards: [],
-            lists: [],
-            tasks: [],
-        };
-    }
-
+class Content extends React.Component {
     handleNewBoard = (name) => {
-        this.setState((oldState) => ({
-            boards: [
-                ...oldState.boards,
-                {
-                    id: uniqueId(),
-                    name,
-                },
-            ],
-        }))
-    }
+        const { addBoard } = this.props;
+        const board = {
+            name,
+            id: uniqueId(),
+        };
 
-    handleNewList = (newList) => {
-        this.setState((oldState) => ({
-            lists: [
-                ...oldState.lists,
-                newList,
-            ],
-        }));
-    }
-
-    handleNewTask = (newTask) => {
-        this.setState((oldState) => ({
-            tasks: [
-                newTask,
-                ...oldState.tasks,
-            ],
-        }));
-    }
-
-    handleUpdateTaskState = (id) => () => {   
-        const index = this.state.tasks.findIndex((task) => task.id === id);
-        this.setState((oldState) => ({
-            tasks: [
-                oldState.tasks[index].state = oldState.tasks[index].state === 'active' ? 'finished' : 'active',
-                ...oldState.tasks
-            ],
-        }));
+        addBoard(board);
     }
 
     render() {
-        const { boards, tasks, lists } = this.state;
+        const { boards } = this.props;
 
         return (
             <main className="content">
                 <Switch>
                     <Route exact path='/'>
                         <ul className="board__list">
-                        <li className="board__item"><AddBoard handleNewBoard={this.handleNewBoard} /></li>
-                            {
-                                boards.length ?                            
+                            <li className="board__item"><AddBoard handleNewBoard={ this.handleNewBoard } /></li>
+                            { boards.length > 0 &&
                                     boards.map((board) => (
-                                        <li className="board__item" key={uniqueId()}>
-                                            <Link className="board__link" to={`/${board.name}-${board.id}`}>{board.name}</Link>
+                                        <li className="board__item" key={ uniqueId() }>
+                                            <Link className="board__link" to={ `/${board.name}-${board.id}` }>{ board.name }</Link>
                                         </li>
-                                    ))
-                                : null
-                            }
+                                    )) }
                         </ul>
                     </Route>
-                    {boards.length ?
+                    { boards.length > 0 &&
                     boards.map((board) => (
-                        <Route key={uniqueId()} path={`/${board.name}-${board.id}`}>
+                        <Route key={ uniqueId() } path={ `/${board.name}-${board.id}` }>
                             <Board
-                                lists={lists.filter((list) => list.boardId === board.id)}
-                                handleNewTask={this.handleNewTask}
-                                handleNewList={this.handleNewList}
-                                handleUpdateTaskState={this.handleUpdateTaskState}
-                                tasks={tasks.filter((task) => task.boardId === board.id)}
-                                title={board.name}
-                                id={board.id}
+                                name={ board.name }
+                                id={ board.id }
                             />
                         </Route>
-                    ))
-                    : null}
-                    <Route path='*' component={NotFound}></Route>
+                    )) }
+                    <Route path='*' component={ NotFound }></Route>
                 </Switch>
             </main>
         );
     }
 }
+
+const mapStateToProp = (state) => ({
+    boards: Object.values(state.boards),
+});
+
+export default connect(mapStateToProp, { addBoard })(Content);

@@ -1,37 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateTaskState } from './../actions';
 import Task from './Task';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 
-const ListTasks = (props) => {
-    const { tasks, handleUpdateTaskState } = props;
-    return (
-        tasks.length ?
-        <ul>
-            {
-                tasks.map((task) => (
-                    <Task
-                        state={task.state}
-                        key={uniqueId()}
-                        handleUpdateTaskState={handleUpdateTaskState}
-                        id={task.id}
-                    >
-                        {task.name}
-                    </Task>
-                ))
-            }
-        </ul>
-        : null
-    );
+class ListTasks extends React.Component {
+    static propTypes = {
+        listId: PropTypes.string.isRequired,
+    }
+
+    handleUpdateTaskState = (id) => () => {
+        const { updateTaskState } = this.props;
+        updateTaskState(id);
+    }
+
+    render() {
+        const { tasks } = this.props;
+        return (
+            tasks.length > 0 &&
+            <ul>
+                {
+                    tasks.map((task) => (
+                        <Task
+                            state={task.state}
+                            key={uniqueId()}
+                            handleUpdateTaskState={this.handleUpdateTaskState}
+                            id={task.id}
+                        >
+                            {task.name}
+                        </Task>
+                    ))
+                }
+            </ul>
+        );
+    }
 };
 
-ListTasks.propTypes = {
-    tasks: PropTypes.array,
-    handleUpdateTaskState: PropTypes.func.isRequired,
-};
+const mapStateToProp = (state, ownProps) => ({
+    tasks: Object.values(state.tasks).filter((task) => task.listId === ownProps.listId)
+});
 
-ListTasks.defaultProps = {
-    tasks: [],
-};
-
-export default ListTasks;
+export default connect(mapStateToProp, { updateTaskState })(ListTasks);

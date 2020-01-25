@@ -9,7 +9,7 @@ export default class AddList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isInput: false,
+            isShowingInput: false,
         };
     }
 
@@ -18,32 +18,34 @@ export default class AddList extends React.Component {
         boardId: PropTypes.string.isRequired,
     }
 
-    toogleInput = () => {
+    handleToggle = () => {
         this.setState((oldState) => ({
-            isInput: !oldState.isInput,
+            isShowingInput: !oldState.isShowingInput,
         }));
     }
 
-    handleInput = (listName) => {
+    handleInput = (name) => {
         const { handleNewList, boardId } = this.props;
         const newList = {
-            listId: uniqueId(),
-            listName,
+            id: uniqueId(),
+            name,
             boardId,
         };
+        
         handleNewList(newList);
     }
 
     render() {
-        const { isInput } = this.state;
+        const { isShowingInput } = this.state;
+        const inputAddList = 
+            <div className="add-list-component">
+                <Button className="button_round" onClick={this.handleToggle}>X</Button>
+                <InputByPress placeholder="List name..." handleInput={this.handleInput} />
+            </div>;
+        const buttonAddList = <Button className="button_square" onClick={this.handleToggle}>Add a list</Button>;
 
         return (
-            isInput ?
-            <div className="add-list-component">
-                <Button className="button_round" onClick={this.toogleInput}>X</Button>
-                <InputByPress placeholder="List name..." handleInput={this.handleInput} />
-            </div>
-            : <Button className="button_square" onClick={this.toogleInput}>Add a list</Button>
+            isShowingInput ? inputAddList : buttonAddList
         );
     }
 }
