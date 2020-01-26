@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateTaskState } from './../actions';
+import { updateTaskState, DnDTaskOneList, DnDTaskBetweenLists } from './../actions';
 import Task from './Task';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
@@ -8,6 +8,8 @@ import { uniqueId } from 'lodash';
 class ListTasks extends React.Component {
     static propTypes = {
         listId: PropTypes.string.isRequired,
+        handleDrop: PropTypes.func.isRequired,
+        handleDragOver: PropTypes.func.isRequired,
     }
 
     handleUpdateTaskState = (id) => () => {
@@ -15,8 +17,20 @@ class ListTasks extends React.Component {
         updateTaskState(id);
     }
 
-    render() {
+    handleDragStart = (id) => (e) => {
         const { tasks } = this.props;
+        const task = JSON.stringify(tasks.find((task) => task.id === id));
+        e.dataTransfer.effectAllowed='move';
+        e.dataTransfer.setData("Task", task);
+    }
+
+    render() {
+        const {
+            tasks,
+            handleDrop,
+            handleDragOver,
+        } = this.props;
+
         return (
             tasks.length > 0 &&
             <ul>
@@ -27,6 +41,9 @@ class ListTasks extends React.Component {
                             key={uniqueId()}
                             handleUpdateTaskState={this.handleUpdateTaskState}
                             id={task.id}
+                            handleDragStart={this.handleDragStart}
+                            handleDragOver={handleDragOver}
+                            handleDrop={handleDrop}
                         >
                             {task.name}
                         </Task>
@@ -41,4 +58,4 @@ const mapStateToProp = (state, ownProps) => ({
     tasks: Object.values(state.tasks).filter((task) => task.listId === ownProps.listId)
 });
 
-export default connect(mapStateToProp, { updateTaskState })(ListTasks);
+export default connect(mapStateToProp, { updateTaskState, DnDTaskOneList, DnDTaskBetweenLists })(ListTasks);
