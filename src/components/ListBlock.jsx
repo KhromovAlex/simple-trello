@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ListTitle from './ListTitle';
 import InputByPress from './InputByPress';
+import Button from './Button';
 import ListTasks from './ListTasks';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { uniqueId } from 'lodash';
-import { addTask, DnDTaskOneList, DnDTaskBetweenLists } from './../actions';
+import { addTask, DnDTaskOneList, DnDTaskBetweenLists, removeList } from './../actions';
 
 class ListBlock extends React.Component {
     static propTypes = {
@@ -37,7 +38,7 @@ class ListBlock extends React.Component {
         const target = e.target.closest('li');
         const { tasks, DnDTaskOneList, DnDTaskBetweenLists } = this.props;
         const taskDrag = JSON.parse(e.dataTransfer.getData('Task'));
-        
+
         if(target.classList.contains('task-component')) {
             const taskDrop = tasks.find((task) => task.id === id);
             if(taskDrag.listId !== taskDrop.listId) {
@@ -52,6 +53,11 @@ class ListBlock extends React.Component {
             }
         }
     }
+    
+    handleRemoveList = () => {
+        const { removeList, listId: id } = this.props;
+        removeList({ id });
+    }
 
     render() {
         const { list, className } = this.props;
@@ -65,6 +71,7 @@ class ListBlock extends React.Component {
                 onDrop={this.handleDrop(list.id)}
                 className={classListBlock}
             >
+                <Button onClick={ this.handleRemoveList } className="button_round button_absolute_top">X</Button>
                 <ListTitle title={list.name} />
                 <InputByPress handleInput={this.handleNewTask} />
                 <ListTasks
@@ -82,4 +89,4 @@ const mapStateToProp = (state, ownProps) => ({
     list: Object.values(state.lists).filter((list) => list.id === ownProps.listId && list.boardId === ownProps.boardId)[0]
 });
 
-export default connect(mapStateToProp, { addTask, DnDTaskOneList, DnDTaskBetweenLists })(ListBlock);
+export default connect(mapStateToProp, { addTask, DnDTaskOneList, DnDTaskBetweenLists, removeList })(ListBlock);

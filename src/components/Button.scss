@@ -24,10 +24,28 @@
     padding: 0;
     font-size: 10px;
     margin-bottom: 20px;
+    color: #f55;
+    font-weight: bold;
 
     &:hover {
-        transform: rotate(180deg);
+        background: #f55;
+        color: #fff;
     }
+}
+
+.button_absolute_top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    transform: translate(-5px, 5px);
+}
+
+.button_absolute_left {
+    @extend .button_absolute_top;
+    top:50%;
+    right: 100%;
+    transform: translate(-5px, -10px);
 }
 
 .button_square {

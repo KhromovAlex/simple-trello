@@ -5,7 +5,8 @@ import AddBoard from './AddBoard';
 import NotFound from './NotFound';
 import { Switch, Route, Link } from 'react-router-dom';
 import { uniqueId } from 'lodash';
-import { addBoard } from './../actions';
+import { addBoard, removeBoard } from './../actions';
+import Button from './Button';
 import './Content.scss';
 
 class Content extends React.Component {
@@ -17,6 +18,11 @@ class Content extends React.Component {
         };
 
         addBoard(board);
+    }
+
+    handleRemoveBoard = (id) => () => {
+        const { removeBoard } = this.props;
+        removeBoard({ id });
     }
 
     render() {
@@ -31,6 +37,7 @@ class Content extends React.Component {
                             { boards.length > 0 &&
                                     boards.map((board) => (
                                         <li className="board__item" key={ uniqueId() }>
+                                            <Button onClick={ this.handleRemoveBoard(board.id) } className="button_round button_absolute_top">X</Button>
                                             <Link className="board__link" to={ `/${board.name}-${board.id}` }>{ board.name }</Link>
                                         </li>
                                     )) }
@@ -56,4 +63,4 @@ const mapStateToProp = (state) => ({
     boards: Object.values(state.boards),
 });
 
-export default connect(mapStateToProp, { addBoard })(Content);
+export default connect(mapStateToProp, { addBoard, removeBoard })(Content);

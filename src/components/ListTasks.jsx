@@ -4,6 +4,7 @@ import { updateTaskState, DnDTaskOneList, DnDTaskBetweenLists } from './../actio
 import Task from './Task';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+import './ListTasks.scss';
 
 class ListTasks extends React.Component {
     static propTypes = {
@@ -33,7 +34,7 @@ class ListTasks extends React.Component {
 
         return (
             tasks.length > 0 &&
-            <ul>
+            <ul className="list-tasks">
                 {
                     tasks.map((task) => (
                         <Task
