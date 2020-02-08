@@ -37,7 +37,7 @@ class Content extends React.Component {
                             { boards.length > 0 &&
                                     boards.map((board) => (
                                         <li className="board__item" key={ uniqueId() }>
-                                            <Button onClick={ this.handleRemoveBoard(board.id) } className="button_round button_absolute_top">X</Button>
+                                            <Button onClick={ this.handleRemoveBoard(board.id) } className="button_round button_absolute_top">{"\u2716"}</Button>
                                             <Link className="board__link" to={ `/${board.name}-${board.id}` }>{ board.name }</Link>
                                         </li>
                                     )) }

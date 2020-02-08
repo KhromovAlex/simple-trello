@@ -39,7 +39,7 @@ export default class AddList extends React.Component {
         const { isShowingInput } = this.state;
         const inputAddList = 
             <div className="add-list-component">
-                <Button className="button_round" onClick={this.handleToggle}>X</Button>
+                <Button className="button_round" onClick={this.handleToggle}>{"\u2716"}</Button>
                 <InputByPress placeholder="List name..." handleInput={this.handleInput} />
             </div>;
         const buttonAddList = <Button className="button_square" onClick={this.handleToggle}>Add a list</Button>;

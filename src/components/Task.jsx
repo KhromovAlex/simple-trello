@@ -36,13 +36,13 @@ class Task extends React.Component {
                 onDragOver={handleDragOver}
                 onDrop={handleDrop(id)}
             >
-                <Button onClick={ this.handleRemoveTask } className="button_round button_absolute_left">X</Button>
+                <Button onClick={ this.handleRemoveTask } className="button_round button_absolute_left">{"\u2716"}</Button>
                 <span className="task-component__text">{children}</span>
                 <Button
                     onClick={handleUpdateTaskState(id)}
                     className="button_task"
                 >
-                    {state === 'active' ? 'V' : 'X'}
+                    {state === 'active' ? "\u2714" : '\u2718'}
                 </Button>
             </li>
         );

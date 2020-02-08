@@ -27,7 +27,7 @@ export default class AddBoard extends React.Component {
         const { handleNewBoard } = this.props;
         const inputAddBoard = 
             <div className="add-board-component">
-                <Button className="button_round" onClick={this.handleToggle}>X</Button>
+                <Button className="button_round" onClick={this.handleToggle}>{"\u2716"}</Button>
                 <h4 className="add-board-component__title">Creating a board</h4>
                 <InputByPress placeholder="Board name..." handleInput={handleNewBoard} />
             </div>;

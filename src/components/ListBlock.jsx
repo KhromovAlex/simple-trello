@@ -71,7 +71,7 @@ class ListBlock extends React.Component {
                 onDrop={this.handleDrop(list.id)}
                 className={classListBlock}
             >
-                <Button onClick={ this.handleRemoveList } className="button_round button_absolute_top">X</Button>
+                <Button onClick={ this.handleRemoveList } className="button_round button_absolute_top">{"\u2716"}</Button>
                 <ListTitle title={list.name} />
                 <InputByPress handleInput={this.handleNewTask} />
                 <ListTasks
