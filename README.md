@@ -1,3 +1,8 @@
+# Simple Trello
+
+![preview](https://github.com/KhromovAlex/simple-trello/blob/master/simple%20trello.gif)
+
+
 ## Available Scripts
 
 In the project directory, you can run:
