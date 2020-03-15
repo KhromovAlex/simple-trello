@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import ClassNames from 'classnames';
+import { uniqueId } from 'lodash';
+
 import ListTitle from './ListTitle';
 import InputByPress from './InputByPress';
 import Button from './Button';
 import ListTasks from './ListTasks';
-import PropTypes from 'prop-types';
-import ClassNames from 'classnames';
-import { uniqueId } from 'lodash';
+
 import { addTask, DnDTaskOneList, DnDTaskBetweenLists, removeList } from './../actions';
 
 class ListBlock extends React.Component {

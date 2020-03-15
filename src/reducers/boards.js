@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+
 import { addBoard, removeBoard } from './../actions';
 
 const boards = handleActions(

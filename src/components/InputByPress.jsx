@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
+
 import './InputByPress.scss';
 
-const InputByPress = (props) => {
+const InputByPress = props => {
     const handlePressEnter = (e) => {
         if(e.key !== 'Enter' || e.target.value.trim() === '') return;
         props.handleInput(e.target.value);
@@ -45,4 +46,4 @@ InputByPress.defaultProps = {
     className: '',
 };
 
-export default InputByPress;
+export default React.memo(InputByPress);

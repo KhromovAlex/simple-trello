@@ -1,9 +1,10 @@
 import React from 'react';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
+
 import './BoardTitle.scss';
 
-const BoardTitle = (props) => {
+const BoardTitle = props => {
     const { title, className } = props;
     const classTitle = ClassNames(
         "board-title",
@@ -19,4 +20,4 @@ BoardTitle.propTypes = {
     className: PropTypes.string,
 };
 
-export default BoardTitle;
+export default React.memo(BoardTitle);

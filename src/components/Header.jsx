@@ -1,10 +1,12 @@
 import React from 'react';
-import Logo from './Logo';
 import ClassNames from 'classnames';
 import PropTypes from 'prop-types';
+
+import Logo from './Logo';
+
 import './Header.scss';
 
-const Header = (props) => {
+const Header = props => {
     const classHeader = ClassNames(
         "header",
         props.className
@@ -21,4 +23,4 @@ Header.propTypes = {
     className: PropTypes.string,
 };
 
-export default Header;
+export default React.memo(Header);

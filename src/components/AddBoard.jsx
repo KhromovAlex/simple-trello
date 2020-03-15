@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Button from './Button';
 import InputByPress from './InputByPress';
-import PropTypes from 'prop-types';
+
 import './AddBoard.scss';
 
-export default class AddBoard extends React.Component {
+export default class AddBoard extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {

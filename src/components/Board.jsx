@@ -1,12 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
+
 import BoardTitle from './BoardTitle';
 import AddList from './AddList';
 import ListBlock from './ListBlock';
-import PropTypes from 'prop-types';
-import { uniqueId } from 'lodash';
-import { addList } from './../actions';
+
 import './Board.scss';
+
+import { addList } from './../actions';
+
+const mapStateToProp = (state, ownProps) => ({
+    lists: Object.values(state.lists).filter((list) => list.boardId === ownProps.id),
+});
 
 class Board extends React.Component {
     static propTypes = {
@@ -43,9 +50,5 @@ class Board extends React.Component {
         );
     }
 };
-
-const mapStateToProp = (state, ownProps) => ({
-    lists: Object.values(state.lists).filter((list) => list.boardId === ownProps.id),
-});
 
 export default connect(mapStateToProp, { addList })(Board);

@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-const Logo = (props) => {
+const Logo = props => {
     const classLogo = ClassNames(
         "header__logo",
         props.className,
     );
 
-    return (
-        <Link className={classLogo} to="/">{props.children}</Link>
-    );
+    return <Link className={classLogo} to="/">{props.children}</Link>;
 };
 
 Logo.propTypes = {
@@ -19,4 +17,4 @@ Logo.propTypes = {
     className: PropTypes.string,
 };
 
-export default Logo;
+export default React.memo(Logo);

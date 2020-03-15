@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+
 import './Button.scss';
 
 const Button = ({children, onClick, className, ...attrs}) => {
@@ -29,4 +30,4 @@ Button.defaultProps = {
     className: '',
 };
 
-export default Button;
+export default React.memo(Button);

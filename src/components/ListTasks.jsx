@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateTaskState, DnDTaskOneList, DnDTaskBetweenLists } from './../actions';
-import Task from './Task';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+
+import Task from './Task';
+
 import './ListTasks.scss';
+
+import { updateTaskState, DnDTaskOneList, DnDTaskBetweenLists } from './../actions';
 
 class ListTasks extends React.Component {
     static propTypes = {

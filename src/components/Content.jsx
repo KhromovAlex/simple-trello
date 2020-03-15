@@ -1,13 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route, Link } from 'react-router-dom';
+import { uniqueId } from 'lodash';
+
 import Board from './Board';
 import AddBoard from './AddBoard';
 import NotFound from './NotFound';
-import { Switch, Route, Link } from 'react-router-dom';
-import { uniqueId } from 'lodash';
-import { addBoard, removeBoard } from './../actions';
 import Button from './Button';
+
 import './Content.scss';
+
+import { addBoard, removeBoard } from './../actions';
+
+const mapStateToProp = (state) => ({
+    boards: Object.values(state.boards),
+});
 
 class Content extends React.Component {
     handleNewBoard = (name) => {
@@ -58,9 +65,5 @@ class Content extends React.Component {
         );
     }
 }
-
-const mapStateToProp = (state) => ({
-    boards: Object.values(state.boards),
-});
 
 export default connect(mapStateToProp, { addBoard, removeBoard })(Content);

@@ -1,10 +1,13 @@
 import React from 'react';
-import Button from './Button';
 import PropTypes from 'prop-types';
 import ClassNames from 'classnames';
 import { connect } from 'react-redux';
-import { removeTask } from './../actions';
+
+import Button from './Button';
+
 import './Task.scss';
+
+import { removeTask } from './../actions';
 
 class Task extends React.Component {
     handleRemoveTask = () => {

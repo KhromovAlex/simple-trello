@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+
 import { addList, removeList, removeBoard } from './../actions';
 
 const lists = handleActions(

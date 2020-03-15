@@ -1,11 +1,13 @@
 import React from 'react';
-import Button from './Button';
-import InputByPress from './InputByPress';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+
+import Button from './Button';
+import InputByPress from './InputByPress';
+
 import './AddList.scss';
 
-export default class AddList extends React.Component {
+export default class AddList extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
