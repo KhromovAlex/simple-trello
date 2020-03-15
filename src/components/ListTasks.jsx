@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { uniqueId } from 'lodash';
 
 import Task from './Task';
 
@@ -42,7 +41,7 @@ class ListTasks extends React.Component {
                     tasks.map((task) => (
                         <Task
                             state={task.state}
-                            key={uniqueId()}
+                            key={task.id}
                             handleUpdateTaskState={this.handleUpdateTaskState}
                             id={task.id}
                             handleDragStart={this.handleDragStart}

@@ -43,7 +43,7 @@ class Content extends React.Component {
                             <li className="board__item"><AddBoard handleNewBoard={ this.handleNewBoard } /></li>
                             { boards.length > 0 &&
                                     boards.map((board) => (
-                                        <li className="board__item" key={ uniqueId() }>
+                                        <li className="board__item" key={ board.id }>
                                             <Button onClick={ this.handleRemoveBoard(board.id) } className="button_round button_absolute_top">{"\u2716"}</Button>
                                             <Link className="board__link" to={ `/${board.name}-${board.id}` }>{ board.name }</Link>
                                         </li>
@@ -52,7 +52,7 @@ class Content extends React.Component {
                     </Route>
                     { boards.length > 0 &&
                     boards.map((board) => (
-                        <Route key={ uniqueId() } path={ `/${board.name}-${board.id}` }>
+                        <Route key={ board.id } path={ `/${board.name}-${board.id}` }>
                             <Board
                                 name={ board.name }
                                 id={ board.id }

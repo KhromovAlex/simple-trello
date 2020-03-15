@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { uniqueId } from 'lodash';
 
 import BoardTitle from './BoardTitle';
 import AddList from './AddList';
@@ -42,7 +41,7 @@ class Board extends React.Component {
                                         boardId={list.boardId}
                                         listId={list.id}
                                         className="list-block"
-                                        key={uniqueId()}
+                                        key={list.id}
                                     />
                             )) }
                 </ul>
